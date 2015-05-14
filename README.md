@@ -6,10 +6,11 @@ The machine requires a public IP address when you deploy this application on it.
 
 ## install Dependencies
 install node.js
+
 npm install
 
 ## register a Nest account
-register a account in [Nest developer websit](https://developer.nest.com/ "Nest developer websit")
+register an account in [Nest developer websit](https://developer.nest.com/ "Nest developer websit")
 
 ## register a Nest client
 then you need to register a Nest client in [Nest clients](https://developer.nest.com/clients)
@@ -27,5 +28,5 @@ fill your Nest Client ID and Client secret, and click button '**submit**', then 
 
 it will jump to nest home websit, then nest user signin and grant access to your client. 
 
-If success, you will see the nest access_token in the result view page[https://113.98.241.99:8000/nesttoken]().
+If success, it will jump to the result view page([https://113.98.241.99:8000/nesttoken]()) show the nest access_token.
 
