@@ -25,63 +25,6 @@ router.get('/', function(req, res, next) {
   var querystr = util.inspect(urlobj.query);
   console.log( "querystr: " + querystr);
 
-  var clntEvents = new events.EventEmitter();
-  
-  clntEvents.on('token', function(tokenRes){
-    console.log("tokenRes:" + tokenRes);
-       
-    // Read the structures:
-    var reqStructOptions = clone(options);
-    var access_token_obj = JSON.parse(tokenRes);
-    if (access_token_obj.access_token == undefined){
-      res.send('Error: no access_token,\n' 
-          + 'authorization code:' + urlobj.query.code 
-          + '\nclient_id:' + nestAppInfo.clientID 
-          + '\nresponseData:\n' + tokenRes);
-      return ;
-    }
-    
-    reqStructOptions.path = "https://developer-api.nest.com/structures?auth=" + access_token_obj.access_token;
-    reqStructOptions.Accept = 'application/json';
-
-    console.log('reqStructOptions:' + util.inspect(reqStructOptions) );
-    var clntReq = https.request(reqStructOptions, function(clntRes) {
-      var clntResData = '';
-      
-      console.log("statusCode: ", clntRes.statusCode);
-      console.log("headers: ", clntRes.headers);
-
-      clntRes.on('data', function(d) {
-        clntResData += d;
-      });
-      
-      clntRes.on('end', function() {
-        process.stdout.write('structures response:\n');
-        process.stdout.write(clntResData);
-        if (clntRes.statusCode == '200'){
-          var thermostats = '';
-          var structObj = JSON.parse(clntResData, function(k,v){
-            console.log('k:', k, 'v:', v);
-            if (k = 'thermostats'){
-              thermostats = v;
-            }
-          });
-          console.log('thermostats value:', thermostats);
-          res.send('access_token:' + access_token_obj.access_token + '\nthermostats:\n' + thermostats);
-        }else{
-          res.send('Error: can\'t get structures, ' + 'access_token:' + access_token_obj.access_token + '\nresponseData:\n' + clntResData);
-        }
-      });
-    
-    });
-    clntReq.end();
-
-    clntReq.on('error', function(e) {
-      console.error(e);
-    }); 
-  
-  });
-
   nest.NestAccList[0].access_token = '';
   var curr_nest_account = nest.NestAccList[0];
   console.log( 'curr_nest_account: ' + util.inspect(curr_nest_account) );
@@ -91,8 +34,6 @@ router.get('/', function(req, res, next) {
     grant_type: 'authorization_code',
     code: urlobj.query.code
     };
-  
-  
 
   var access_token_url_path = '/oauth2/access_token?'
       + querystring.stringify(query_param);   
