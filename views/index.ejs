@@ -1,0 +1,57 @@
+
+    <div class="container">
+      <div class="starter-template">
+        <h1><%= title %></h1>
+        <p class="lead">Welcome to <%= title %></p>
+      </div>
+
+      <% if (EditMode) { %>
+        <form class="form-horizontal" method="post">
+          <div class="form-group">
+            <label class="col-sm-2 text-nowrap text-left">Nest Client ID: </label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name="clientID" placeholder="Enter your Nest ClientID" value=<%= clientID%>></input>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 text-nowrap text-left">Nest Client secret: </label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name="clientSecret" placeholder="Enter your Nest ClientSecret" value=<%= clientSecret%>></input>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">
+              <input type="submit" class="btn btn-default" value="Submit" />
+            </div>
+          </div>
+        </form>
+      <% } else { %>
+        <form class="form-horizontal" method="post">
+          <div class="row form-group text-left">
+            <label class="col-sm-2 text-nowrap text-left">Nest Client ID: </label>
+            <label class="col-sm-4 text-nowrap text-left"><%= clientID%></label>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 text-nowrap text-left">Nest Client secret: </label>
+            <label class="col-sm-4 text-nowrap text-left"><%= clientSecret%></label>
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 text-nowrap text-left">Nest Authorization URL: </label>
+            <label class="col-sm-4 text-nowrap text-left"><%= nestAuthUrl%></label>
+          </div>
+          <div class="row">
+            <div class="col-sm-2">
+              <input type="submit" class="btn btn-default" value="Authenticate" formaction="/nestauth" />
+            </div>
+            <div class="col-sm-1">
+              <input type="button" class="btn btn-large" value="Edit" onclick="window.location.href = homehref();" />      
+            </div>
+            <div class="col-sm-1">
+              <input type="button" class="btn" value="View Token" onclick="window.location.href = homehref() + 'nesttoken';" /> 
+              <!--<a class="btn btn-large" href="/nesttoken">View Token</a> -->
+            </div>
+          </div>
+        </form>
+      <% } %>
+    </div>
+

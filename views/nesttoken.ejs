@@ -1,0 +1,34 @@
+
+
+    <div class="container">
+      <div class="starter-template">
+        <h1><%= title %></h1>
+        <p class="lead"><%= msg%></p>
+      </div>
+      
+      <div class="row">
+        <label class="col-sm-2 text-nowrap text-left">Nest Client ID: </label>
+        <label class="col-sm-4 text-nowrap text-left"><%= clientID%></label>
+      </div>
+      <div class="row">
+        <label class="col-sm-2 text-nowrap text-left">Nest Client secret: </label>
+        <label class="col-sm-4 text-nowrap text-left"><%= clientSecret%></label>
+      </div>
+      <div class="row">
+        <label class="col-sm-2 text-nowrap text-left">Nest access_token: </label>
+        <label class="col-sm-4 text-nowrap text-left"><%= access_token%></label>
+      </div>
+      <% if (expires_in != undefined) {%>
+      <div class="row">
+        <label class="col-sm-2 text-nowrap text-left">token expires_in: </label>
+        <label class="col-sm-4 text-nowrap text-left"><%= expires_in%></label>
+      </div>
+      <% }%>
+
+      <div class="row">
+        <div class="col-sm-2">
+          <input type="button" value="Home" onclick="window.location.href = homehref();" />
+        </div>
+      </div>
+    </div>
+
